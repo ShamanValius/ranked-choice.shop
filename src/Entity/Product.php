@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -20,6 +21,11 @@ class Product
 	 * @ORM\Column(type="integer")
 	 */
 	private $id;
+
+	/**
+	 * @ORM\Column(type="uuid")
+	 */
+	private $uuid;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
@@ -63,6 +69,7 @@ class Product
 
 	public function __construct()
 	{
+		$this->uuid = Uuid::v4();
 		$this->createdAt = new DateTimeImmutable();
 		$this->isDeleted = false;
 		$this->isPublished = false;
@@ -72,6 +79,11 @@ class Product
 	public function getId(): ?int
 	{
 		return $this->id;
+	}
+
+	public function getUuid(): ?string
+	{
+		return $this->uuid;
 	}
 
 	public function getTitle(): ?string
