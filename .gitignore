@@ -19,5 +19,12 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
+#IDE folder
 .vscode
 .idea
+
+#Temp folder and files
+public/uploads
+.temp
+.txt
+
