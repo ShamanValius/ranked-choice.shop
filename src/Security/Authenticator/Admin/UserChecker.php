@@ -15,7 +15,9 @@ class UserChecker implements UserCheckerInterface
 			return;
 		}
 
-		if (!in_array('ROLE_ADMIN', $user->getRoles())) {
+        // TODO This check does not take into account the hierarchy of roles
+		if (!in_array('ROLE_ADMIN', $user->getRoles())
+                && !in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
 			throw new CustomUserMessageAccountStatusException('Your user account is not an administrator!');
 		}
 	}
